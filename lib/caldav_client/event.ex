@@ -9,10 +9,11 @@ defmodule CalDAVClient.Event do
   @type t :: %__MODULE__{
           icalendar: String.t(),
           url: String.t(),
-          etag: String.t()
+          etag: String.t(),
+          status: String.t()
         }
 
-  @enforce_keys [:icalendar, :url, :etag]
+  @enforce_keys [:icalendar, :url, :etag, :status]
   defstruct @enforce_keys
 
   @doc """
