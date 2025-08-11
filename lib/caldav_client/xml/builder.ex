@@ -194,6 +194,43 @@ defmodule CalDAVClient.XML.Builder do
     |> serialize()
   end
 
+  def build_retrieve_calendar_properties() do
+    {"D:propfind",
+     [
+       "xmlns:D": "DAV:",
+       "xmlns:C": "urn:ietf:params:xml:ns:caldav",
+       "xmlns:cs": "http://calendarserver.org/ns/"
+     ],
+     [
+       {"D:prop", nil,
+        [
+          {"cs:getctag"},
+          {"D:displayname"},
+          {"D:sync-token"},
+          {"C:calendar-description"}
+        ]}
+     ]}
+    |> serialize()
+  end
+
+  def build_report_calendar(sync_token, depth, limit) do
+    {"D:sync-collection", ["xmlns:D": "DAV:"],
+     [
+       {"D:sync-token", nil, sync_token},
+       {"D:sync-level", nil, Integer.to_string(depth)},
+       {"D:limit", nil,
+        [
+          {"D:nresults", nil, Integer.to_string(limit)}
+        ]},
+       {"D:prop", nil,
+        [
+          {"D:getcontenttype"},
+          {"D:getetag"}
+        ]}
+     ]}
+    |> serialize()
+  end
+
   defp serialize(tree) do
     tree
     |> XmlBuilder.document()
