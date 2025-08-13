@@ -118,9 +118,8 @@ defmodule CalDAVClient.Event do
     case caldav_client
          |> make_tesla_client()
          |> Tesla.get(event_url) do
-      {:ok, %Tesla.Env{status: 200, body: icalendar} = env} ->
-        etag = env |> Tesla.get_header("etag")
-        {:ok, icalendar, etag}
+      {:ok, %Tesla.Env{status: 200, body: icalendar}} ->
+        {:ok, icalendar}
 
       {:ok, %Tesla.Env{status: code}} ->
         {:error, reason_atom(code)}
