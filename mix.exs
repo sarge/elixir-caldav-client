@@ -37,10 +37,10 @@ defmodule CalDAVClient.MixProject do
       {:tesla, "~> 1.5"},
       {:xml_builder, "~> 2.2"},
       {:sweet_xml, "~> 0.7"},
-      {:tzdata, "~> 1.1", optional: true},
-      {:hackney, "~> 1.23", optional: true},
+      {:tzdata, github: "legoscia/tzdata", branch: "hackney-1.x-4.x"},
+      {:hackney, "~> 4.4", optional: true},
       {:ex_parameterized, "~> 1.3", only: :test},
-      {:ex_doc, "~> 0.28.2", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.40.3", only: :dev, runtime: false}
     ]
   end
 
